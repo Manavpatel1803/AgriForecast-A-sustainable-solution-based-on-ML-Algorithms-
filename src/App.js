@@ -7,6 +7,8 @@ import { auth } from './firebase';
 import Navbar from './components/Navbar/Navbar';
 import Predict from './components/Predict/Predict';
 import CropRecommend from './components/Recommend/CropRecommend';
+import './App.css';
+import Footer from './components/footer/Footer';
 
 
 function App() {
@@ -37,6 +39,7 @@ const [username, setUsername] = useState('');
           <Route path='/Navbar' element={<Navbar name={userName}/>} />
           <Route path='/predict' element={<Predict name={userName}/>} />
           <Route path='/CropRecommend' element={<CropRecommend name={userName}/>} />
+          <Route path='/footer' element={<Footer name={userName}/>} />
 
         </Routes>
       </Router>

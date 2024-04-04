@@ -1,8 +1,9 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import {useRef} from 'react';
 import axios from 'axios';
 import Navbar from '../Navbar/Navbar'
-import './predict.css';
+
+import Footer from '../footer/Footer';
 
 
 const  Area = ['Albania', 'Algeria', 'Angola', 'Argentina', 'Armenia',
@@ -70,34 +71,48 @@ const handleChangeItem = (e) => {
             console.error('Error occurred while making the request:', error);
         }
     };
+    useEffect(() => {
+        const colors = ['#FFD700', '#ADD8E6', '#98FB98']; // Gold, Light Blue, Pale Green
+        let index = 0;
+    
+        const interval = setInterval(() => {
+          document.body.style.backgroundColor = colors[index];
+          index = (index + 1) % colors.length;
+        }, 5000); // Change background color every 5 seconds
+    
+        return () => clearInterval(interval);
+      }, []);
+
+
     return (
-        <div>
+        <div className="bg-gray-100 min-h-screen">
              <Navbar userName={name} />
-        <h1 class="first">AgriForecast</h1>
-    <div class="container">
+             <div className="container mx-auto px-4 pt-16">
+        <h1 className="text-4xl font-bold mb-8">AgriForecast</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        <h2>Calculate the yield </h2>
+        <h2 className="text-2xl mb-4">Calculate the yield </h2>
 
-        <form  onSubmit={handleSubmit}>
+        <form  onSubmit={handleSubmit} className="space-y-4">
         <div class="form-group">
-                <label htmlFor="Year">Enter the Year to be predicted</label>
-                <input type="number" class="form-control" name="Year" step="any" placeholder="Enter the Year" onChange={handleChange} />
+                <label htmlFor="Year" className="block text-lg font-medium text-gray-700">Enter the Year to be predicted</label>
+                <input type="number"className="form-input mt-1 block w-full" name="Year" step="any" placeholder="Enter the Year" onChange={handleChange} />
         </div>
     <div class="form-group">
-        <label htmlFor="average_rain_fall_mm_per_year">Enter the estimated rainfall per year</label>
-            <input type="number" class="form-control" name="average_rain_fall_mm_per_year" step="any"  placeholder="Enter the Rainfall per mm" onChange={handleChange} />
+        <label htmlFor="average_rain_fall_mm_per_year" className="block text-lg font-medium text-gray-700">Enter the estimated rainfall per year</label>
+            <input type="number" className="form-input mt-1 block w-full" name="average_rain_fall_mm_per_year" step="any"  placeholder="Enter the Rainfall per mm" onChange={handleChange} />
         </div>
     <div class="form-group">
-        <label htmlFor="pesticides_tonnes">Amount of pesticides used (in tones)</label>
-            <input type="number" class="form-control" name="pesticides_tonnes" step="any"  placeholder="Enter the pesticides used around the year" onChange={handleChange} />
+        <label htmlFor="pesticides_tonnes" className="block text-lg font-medium text-gray-700">Amount of pesticides used (in tones)</label>
+            <input type="number" className="form-input mt-1 block w-full" name="pesticides_tonnes" step="any"  placeholder="Enter the pesticides used around the year" onChange={handleChange} />
         </div>
     <div class="form-group">
-        <label htmlFor="avg_temp">Average temperature around the year</label>
-            <input type="number" class="form-control" name="avg_temp" step="any" placeholder="Enter the Temperature" onChange={handleChange} />
+        <label htmlFor="avg_temp" className="block text-lg font-medium text-gray-700">Average temperature around the year</label>
+            <input type="number" className="form-input mt-1 block w-full" name="avg_temp" step="any" placeholder="Enter the Temperature" onChange={handleChange} />
         </div>
     <div class="form-group">
-        <label htmlFor="Area">Select the country from the list : </label>
-        <select id="Area" name="Area" value={formData.Area} onChange={handleChange}>
+        <label htmlFor="Area" className="block text-lg font-medium text-gray-700">Select the country from the list : </label>
+        <select id="Area" name="Area" value={formData.Area} onChange={handleChange} className="form-select mt-1 block w-full">
           <option value="">Select from the list of countries</option>
           {Area.map(country => (
                     <option key={country} value={country}>{country}</option>
@@ -106,8 +121,8 @@ const handleChangeItem = (e) => {
         </select>
     </div>
     <div class="form-group">
-        <label htmlFor="Item">Select the items from the list : </label>
-         <select id="Item" name="Item" value={formData.Item}onChange={handleChange}>
+        <label htmlFor="Item" className="block text-lg font-medium text-gray-700">Select the items from the list : </label>
+         <select id="Item" name="Item" value={formData.Item}onChange={handleChange} className="form-select mt-1 block w-full">
           <option>---Choose from the List---</option>
           {items.map(items => (
                     <option key={items} value={items}>{items}</option>
@@ -116,13 +131,17 @@ const handleChangeItem = (e) => {
         <br/>
     </div>
     <br/>
-    <button type="submit" class="button">Predict</button>
+    <button type="submit" className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">Predict</button>
 
 </form>
 
 
     
 </div>
+
+
+</div>
+<Footer />
 </div>
 
   )

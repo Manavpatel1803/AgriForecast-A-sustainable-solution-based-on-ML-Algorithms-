@@ -1,7 +1,7 @@
 import React ,{useState} from 'react'
 import axios from 'axios';
 import Navbar from '../Navbar/Navbar'
-import './recommend.css'
+import Footer from '../footer/Footer'
 
 
 const State = ["Andaman & Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli", "Daman & Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"];
@@ -96,48 +96,49 @@ const CropRecommend = ({name}) => {
     };
 
   return (
-    <div>
-           <div>
+    <div className="bg-gray-100 min-h-screen">
              <Navbar userName={name}/>
 
-             <h1 class="first">Crop Suggestion </h1>
+             <div className="container mx-auto px-4 pt-16">
+
+             <h1 className="text-4xl font-bold mb-8" >Crop Suggestion </h1>
        
-    <div class="container">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        <h2> Crop Recommendation for Indian States </h2>
+        <h2 className="text-2xl mb-4"> Crop Recommendation for Indian States </h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}  className="space-y-4">
         <div class="form-group">
-                <label htmlFor="Nitrogen">Nitrogen</label>
-                <input type="number" class="form-control" name="Nitrogen" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
+                <label htmlFor="Nitrogen" className="block text-lg font-medium text-gray-700">Nitrogen</label>
+                <input type="number" className="form-input mt-1 block w-full" name="Nitrogen" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
         </div>
     <div class="form-group">
-        <label htmlFor="Phosphorous">Phosphorous</label>
-            <input type="number" class="form-control" name="Phosphorous" step="any"  placeholder="Enter the value (example:50)" onChange={handleChange} required/>
+        <label htmlFor="Phosphorous" className="block text-lg font-medium text-gray-700">Phosphorous</label>
+            <input type="number" className="form-input mt-1 block w-full" name="Phosphorous" step="any"  placeholder="Enter the value (example:50)" onChange={handleChange} required/>
         </div>
     <div class="form-group">
-        <label htmlFor="Potassium">Potassium</label>
-            <input type="number" class="form-control" name="Postassium" step="any"  placeholder="Enter the value (example:50)" onChange={handleChange} required/>
-        </div>
-        <div class="form-group">
-                <label htmlFor="Temperature">Temperature</label>
-                <input type="number" class="form-control" name="Temperature" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
+        <label htmlFor="Potassium"className="block text-lg font-medium text-gray-700">Potassium</label>
+            <input type="number" className="form-input mt-1 block w-full" name="Postassium" step="any"  placeholder="Enter the value (example:50)" onChange={handleChange} required/>
         </div>
         <div class="form-group">
-                <label htmlFor="Humidity">Humidity</label>
-                <input type="number" class="form-control" name="Humidity" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
+                <label htmlFor="Temperature" className="block text-lg font-medium text-gray-700">Temperature</label>
+                <input type="number" className="form-input mt-1 block w-full" name="Temperature" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
+        </div>
+        <div class="form-group">
+                <label htmlFor="Humidity" className="block text-lg font-medium text-gray-700">Humidity</label>
+                <input type="number" className="form-input mt-1 block w-full" name="Humidity" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
         </div>
     <div class="form-group">
-        <label htmlFor="ph">ph Level</label>
-            <input type="number" class="form-control" name="ph" step="any" placeholder="Enter the value"  onChange={handleChange} required/>
+        <label htmlFor="ph" className="block text-lg font-medium text-gray-700">ph Level</label>
+            <input type="number" className="form-input mt-1 block w-full" name="ph" step="any" placeholder="Enter the value"  onChange={handleChange} required/>
         </div>
     <div class="form-group">
-        <label htmlFor="Rainfall">Rainfall (in mm)</label>
-            <input type="number" class="form-control" name="Rainfall" step="any" placeholder="Enter the value" onChange={handleChange} required/>
+        <label htmlFor="Rainfall" className="block text-lg font-medium text-gray-700">Rainfall (in mm)</label>
+            <input type="number"className="form-input mt-1 block w-full" name="Rainfall" step="any" placeholder="Enter the value" onChange={handleChange} required/>
         </div>
     <div class="form-group">
-        <label htmlFor="State">Select the State from the list : </label>
-        <select id="name" name="State" value={selectedState} onChange={handleChangeState} required>
+        <label htmlFor="State" className="block text-lg font-medium text-gray-700">Select the State from the list : </label>
+        <select id="name" name="State" value={selectedState} onChange={handleChangeState} className="form-select mt-1 block w-full">
         <option value="">Select from the list of States</option>
         {State.map((state) => ( <option value={state}>{state}</option>))}
 
@@ -145,8 +146,8 @@ const CropRecommend = ({name}) => {
        
     </div>
     <div class="form-group">
-        <label htmlFor="City">Select  the City Name </label>
-        <select id="City" name="City" value={formData.City} onChange={handleChangeCity} required>
+        <label htmlFor="City" className="block text-lg font-medium text-gray-700">Select  the City Name </label>
+        <select id="City" name="City" value={formData.City} onChange={handleChangeCity} className="form-select mt-1 block w-full">
 
         <option value="">Select from the list of Cities</option>
                 {citiesbyState[selectedState] && citiesbyState[selectedState].map((city) => <option key={city} value={city}>{city}</option>)}
@@ -155,7 +156,7 @@ const CropRecommend = ({name}) => {
         </div>
     
     <br/>
-    <button type="submit" class="button">Recommend</button>
+    <button type="submit"  className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">Recommend</button>
 
 </form>
 
@@ -163,6 +164,7 @@ const CropRecommend = ({name}) => {
     
 </div>
 </div>
+<Footer />
     </div>
   )
 }

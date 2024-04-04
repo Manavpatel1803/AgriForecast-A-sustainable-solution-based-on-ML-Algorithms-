@@ -4,7 +4,7 @@ import InputControl from '../InputControl/InputControl';
 import {Link, useNavigate} from 'react-router-dom';
 import {  signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
-import video  from '../../images/video.mp4'
+import video  from '../../images/farm.mp4'
 
 function Login() {
     const navigate=useNavigate();
