@@ -1,4 +1,4 @@
-import React ,{useState} from 'react'
+import React ,{useState,useEffect} from 'react'
 import axios from 'axios';
 import Navbar from '../Navbar/Navbar'
 import Footer from '../footer/Footer'
@@ -73,9 +73,134 @@ const CropRecommend = ({name}) => {
         State: '',
         City: ''
     });
+    const [errors, setErrors] = useState({
+        Nitrogen: '',
+        Phosphorous:'',
+        Potassium:'',
+        Temperature:'',
+        Humidity:'',
+        ph:'',
+        Rainfall:'',
+
+    });
+    const [prediction, setPrediction] = useState(null); 
+
+
+    const [imageUrl, setImageUrl] = useState('');
+    const fetchImage = async (crop) => {
+        try {
+            const response = await axios.get(`https://api.unsplash.com/photos/random?query=${crop}&client_id=5LjYZkUMUsLX98mopF57FCXQ8QHFGzXeHI5z7MWMPbY`);
+            setImageUrl(response.data.urls.regular);
+        } catch (error) {
+            console.error('Error fetching image:', error);
+        }
+    };
+    useEffect(() => {
+        if (prediction) {
+            fetchImage(prediction);
+        }
+    }, [prediction]);
 
     const handleChange = (e) => { 
+        const { name, value } = e.target;
         setFormData({ ...formData, [e.target.name]: e.target.value});
+       if( name ==='ph')
+       {
+        if(value<0 || value>14)
+        {
+            setErrors({...errors, ph:'Enter the value between 0 to 14 !!!'})
+        }
+        else if(value<0)
+        {
+             setErrors({...errors, ph:'Enter the value greater than 0 !!!'})
+        }
+        else
+        {
+            setErrors({...errors, ph:''})
+        }
+       }
+
+       if(name==='Nitrogen')
+       {
+           if(value.includes('.'))
+           {
+                setErrors({...errors, Nitrogen:'Enter Nitrogen value without decimal as it is % by weight value!!!'})
+           }
+           else if(value<0)
+           {
+                setErrors({...errors, Nitrogen:'Enter the value greater than 0 !!!'})
+           }
+           else
+           {
+               setErrors({...errors, Nitrogen:''})
+           }
+       }
+
+       if(name==='Phosphorous')
+       {
+           if(value.includes('.'))
+           {
+                setErrors({...errors, Phosphorous:'Enter Phosphorous value without decimal as it is % by weight value!!!'})
+           }
+           else if(value<0)
+           {
+                setErrors({...errors, Phosphorous:'Enter the value greater than 0 !!!'})
+           }
+           else
+           {
+               setErrors({...errors, Phosphorous:''})
+           }
+       }
+       if(name==='Potassium')
+       {
+           if(value.includes('.'))
+           {
+                setErrors({...errors, Potassium:'Enter Potassium value without decimal as it is % by weight value!!!'})
+           }
+           else
+           {
+               setErrors({...errors, Potassium:''})
+           }
+       }
+       if(name==='Rainfall')
+       {
+            if(value<0)
+            {
+                setErrors({...errors, Rainfall:'Enter the value greater than 0 !!!'})
+            }
+            else if (value >300)
+            {
+                setErrors({...errors, Rainfall:'Enter the value less than 300 mm  !!!'})
+            
+            }
+            else
+            {
+                setErrors({...errors, Rainfall:''})
+            }
+       }
+
+       if(name==='Temperature')
+       {
+           if(value>50)
+           {
+                setErrors({...errors, Temperature:'Temperature should be below 50 C !!!'})
+           }
+           else
+           {
+               setErrors({...errors, Temperature:''})
+           }
+       }
+       if(name==='Humidity')
+       {
+           if(value<0 || value>100)
+           {
+                setErrors({...errors, Humidity:'Enter the Humdiity value between 0 to 100  !!!'})
+           }
+           else
+           {
+               setErrors({...errors, Humidity:''})
+           }
+       }
     };
 
     const handleSubmit = async (e) => {
@@ -85,10 +210,8 @@ const CropRecommend = ({name}) => {
             console.log('Form data:', formData);
             const response = await axios.post('http://localhost:5000/recommend', formData); // Adjust the endpoint URL accordingly
             console.log('Response',response.data); // Handle the response as needed
-
-      
             const prediction = response.data.prediction;
-        alert(`You can grow the following crop in your farm which is " ${prediction}" !!!`);
+            setPrediction(prediction);
         }
         catch (error) {
             console.error('Error occurred while making the request:', error);
@@ -98,47 +221,49 @@ const CropRecommend = ({name}) => {
   return (
     <div className="bg-gray-100 min-h-screen">
              <Navbar userName={name}/>
-
-             <div className="container mx-auto px-4 pt-16">
-
-             <h1 className="text-4xl font-bold mb-8" >Crop Suggestion </h1>
-       
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        <h2 className="text-2xl mb-4"> Crop Recommendation for Indian States </h2>
-
+             <div className="container mx-auto px-4 pt-16 flex justify-center">
+             <div className="max-w-md w-full mb-8"> {/* Add margin bottom here */}
+             <h1 className="text-4xl font-bold mb-8 text-center" >Crop Suggestion </h1>
+             <h2 className="text-2xl mb-4"> Crop Recommendation for Indian States </h2>
         <form onSubmit={handleSubmit}  className="space-y-4">
         <div class="form-group">
                 <label htmlFor="Nitrogen" className="block text-lg font-medium text-gray-700">Nitrogen</label>
-                <input type="number" className="form-input mt-1 block w-full" name="Nitrogen" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
+                <input type="number" className={`form-input mt-1 py-1 block w-full ${errors.Nitrogen ? 'border-red-500' : ''}`} name="Nitrogen" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
+                {errors.Nitrogen && <p className="text-red-500 text-sm">{errors.Nitrogen}</p>}
         </div>
     <div class="form-group">
         <label htmlFor="Phosphorous" className="block text-lg font-medium text-gray-700">Phosphorous</label>
-            <input type="number" className="form-input mt-1 block w-full" name="Phosphorous" step="any"  placeholder="Enter the value (example:50)" onChange={handleChange} required/>
+            <input type="number" className={`form-input mt-1 py-1 block w-full ${errors.Phosphorous ? 'border-red-500' : ''}`} name="Phosphorous" step="any"  placeholder="Enter the value (example:50)" onChange={handleChange} required/>
+            {errors.Phosphorous&& <p className="text-red-500 text-sm">{errors.Phosphorous}</p>}
         </div>
     <div class="form-group">
         <label htmlFor="Potassium"className="block text-lg font-medium text-gray-700">Potassium</label>
-            <input type="number" className="form-input mt-1 block w-full" name="Postassium" step="any"  placeholder="Enter the value (example:50)" onChange={handleChange} required/>
+            <input type="number" className={`form-input mt-1 py-1 block w-full ${errors.Potassium ? 'border-red-500' : ''}`} name="Postassium" step="any"  placeholder="Enter the value (example:50)" onChange={handleChange} required/>
+            {errors.Potassium && <p className="text-red-500 text-sm">{errors.Potassium}</p>}
         </div>
         <div class="form-group">
                 <label htmlFor="Temperature" className="block text-lg font-medium text-gray-700">Temperature</label>
-                <input type="number" className="form-input mt-1 block w-full" name="Temperature" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
+                <input type="number" className={`form-input mt-1 py-1 block w-full ${errors.Temperature? 'border-red-500' : ''}`} name="Temperature" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
+                {errors.Temperature && <p className="text-red-500 text-sm">{errors.Temperature}</p>}
         </div>
         <div class="form-group">
                 <label htmlFor="Humidity" className="block text-lg font-medium text-gray-700">Humidity</label>
-                <input type="number" className="form-input mt-1 block w-full" name="Humidity" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
+                <input type="number" className={`form-input mt-1 py-1 block w-full ${errors.Humidity ? 'border-red-500' : ''}`} name="Humidity" step="any" placeholder="Enter the value (example:50)" onChange={handleChange}  required/>
+                {errors.Humidity && <p className="text-red-500 text-sm">{errors.Humidity}</p>}
         </div>
     <div class="form-group">
         <label htmlFor="ph" className="block text-lg font-medium text-gray-700">ph Level</label>
-            <input type="number" className="form-input mt-1 block w-full" name="ph" step="any" placeholder="Enter the value"  onChange={handleChange} required/>
+            <input type="number" className={`form-input mt-1 py-1 block w-full ${errors.ph ? 'border-red-500' : ''}`} name="ph" step="any" placeholder="Enter the value"  onChange={handleChange} required/>
+            {errors.ph && <p className="text-red-500 text-sm">{errors.ph}</p>}
         </div>
     <div class="form-group">
         <label htmlFor="Rainfall" className="block text-lg font-medium text-gray-700">Rainfall (in mm)</label>
-            <input type="number"className="form-input mt-1 block w-full" name="Rainfall" step="any" placeholder="Enter the value" onChange={handleChange} required/>
+            <input type="number"className={`form-input mt-1 py-1 block w-full ${errors.Rainfall ? 'border-red-500' : ''}`} name="Rainfall" step="any" placeholder="Enter the value" onChange={handleChange} required/>
+            {errors.Rainfall && <p className="text-red-500 text-sm">{errors.Rainfall}</p>}
         </div>
     <div class="form-group">
         <label htmlFor="State" className="block text-lg font-medium text-gray-700">Select the State from the list : </label>
-        <select id="name" name="State" value={selectedState} onChange={handleChangeState} className="form-select mt-1 block w-full">
+        <select id="name" name="State" value={selectedState} onChange={handleChangeState} className="form-select mt-1 py-1 block w-full">
         <option value="">Select from the list of States</option>
         {State.map((state) => ( <option value={state}>{state}</option>))}
 
@@ -147,7 +272,7 @@ const CropRecommend = ({name}) => {
     </div>
     <div class="form-group">
         <label htmlFor="City" className="block text-lg font-medium text-gray-700">Select  the City Name </label>
-        <select id="City" name="City" value={formData.City} onChange={handleChangeCity} className="form-select mt-1 block w-full">
+        <select id="City" name="City" value={formData.City} onChange={handleChangeCity} className="form-select mt-1  py-1 block w-full">
 
         <option value="">Select from the list of Cities</option>
                 {citiesbyState[selectedState] && citiesbyState[selectedState].map((city) => <option key={city} value={city}>{city}</option>)}
@@ -160,10 +285,34 @@ const CropRecommend = ({name}) => {
 
 </form>
 
+{prediction && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="bg-gray-900 bg-opacity-75 absolute inset-0"></div>
+                    <div className="relative bg-white rounded-lg px-8 py-6 shadow-xl z-10">
+                        <div className="flex items-center justify-center mb-4">
+                            <h2 className="text-lg font-bold">Crop Recommendation</h2>
+                        </div>
+                        <div className="flex items-center justify-center mb-4">
+                            {imageUrl ? (
+                                <img src={imageUrl} alt={prediction} className="w-40 h-40 rounded-full" />
+                            ) : (
+                                <div className="w-40 h-40 bg-gray-200 flex items-center justify-center rounded-full">
+                                    <p className="text-gray-500">Image Loading...</p>
+                                </div>
+                            )}
+                        </div>
+                        <p className="text-gray-700 mb-4">Congratulations! You can grow "{prediction}" in your farm</p>
+                        <button onClick={() => setPrediction(null)} className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">Close</button>
+                    </div>
+                </div>
+            )}
+
 
     
+
 </div>
 </div>
+
 <Footer />
     </div>
   )

@@ -21,7 +21,7 @@ const Navbar = ({userName}) => {
       };
 
     return (
-        <nav id="navbar" className={isBlackMode ? 'bg-black text-white' : 'bg-white text-black'} style={{height: '200px' }}>
+        <nav id="navbar" className={isBlackMode ? 'bg-[#004d00] text-white' : 'bg-white text-black'} style={{height: '200px' }}>
             <div className="nav-wrapper flex justify-between items-center h-full">
                 {/* Navbar Logo */}
                 <div className="logo h-full ">

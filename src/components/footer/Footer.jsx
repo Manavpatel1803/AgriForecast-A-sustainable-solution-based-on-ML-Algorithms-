@@ -11,6 +11,7 @@ import {
 
 const Footer = () => {
   return (
+    <footer id="bottom" className='bg-[#004d00]'>
     <div className='max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300'>
       <div>
         <h1 className='w-full text-3xl font-bold text-[#00df9a]'>AgriForecast</h1>
@@ -65,6 +66,7 @@ const Footer = () => {
         <p>Designed by <a href='https://www.creative-tim.com/' className='text-[#00df9a]'>Manav Patel</a></p>
         </div>
     </div>
+    </footer>
   )
 }
 

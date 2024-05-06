@@ -9,6 +9,8 @@ import Predict from './components/Predict/Predict';
 import CropRecommend from './components/Recommend/CropRecommend';
 import './App.css';
 import Footer from './components/footer/Footer';
+import NewsPage from './components/NewsPage/NewsPage';
+import WeatherForecast from './components/Weather/WeatherForecast';
 
 
 function App() {
@@ -40,6 +42,8 @@ const [username, setUsername] = useState('');
           <Route path='/predict' element={<Predict name={userName}/>} />
           <Route path='/CropRecommend' element={<CropRecommend name={userName}/>} />
           <Route path='/footer' element={<Footer name={userName}/>} />
+          <Route path='/NewsPage' element={<NewsPage name={userName}/>} />
+          <Route path='/WeatherForecast' element={<WeatherForecast name={userName}/>} />
 
         </Routes>
       </Router>
