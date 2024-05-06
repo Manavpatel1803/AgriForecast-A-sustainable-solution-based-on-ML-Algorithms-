@@ -1,71 +1,82 @@
-#AgriForecast- A sustainable solution for crop yield prediction using ML algorithms 
+# AgriForecast- A sustainable solution for crop yield prediction using ML algorithms 
 
-![Logo](components/images/farm.mp4)
+![Logo](src/images/logo.png)
 
 
-## Available Scripts
+#
 
-In the project directory, you can run:
+A Crop yield prediction solution using Machine learning to predict the crop production based on the environmental data and that will help farmers or agricultural experts to effectively analyse prodcution  or loss of crop in order to do sustainable farming.
 
-### `npm start`
+## [Demo](https://uelac-my.sharepoint.com/:v:/r/personal/u2045599_uel_ac_uk/Documents/Recordings/Demo%20Video%20for%20dissertation%20Manav%20Yogesh%20PATEL-20240412_142424-Meeting%20Recording.mp4?csf=1&web=1&e=MUVO0i)
+ 
+[<img src="src/images/image.jpg">](https://uelac-my.sharepoint.com/:v:/r/personal/u2045599_uel_ac_uk/Documents/Recordings/Demo%20Video%20for%20dissertation%20Manav%20Yogesh%20PATEL-20240412_142424-Meeting%20Recording.mp4?csf=1&web=1&e=MUVO0i)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+NodeJS and npm which can be downloaded from the [NodeJS website](https://nodejs.org/en/download/).
 
-### `npm test`
+# Front-End 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone the project
 
-### `npm run build`
+```bash
+  git clone https://github.com/Manavpatel1803/AgriForecast-A-sustainable-solution-based-on-ML-Algorithms-.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Go to the client directory
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+  cd firebase-auth
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Installing dependencies 
+```bash
+  npm install 
+```
+Running on local environment 
 
-### `npm run eject`
+```bash
+  npm start 
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Go to the server directory
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+  cd new
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Initiate Virtual Environment 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+  python -m venv venv
+  .venv\Scripts\activate 
+```
 
-## Learn More
+Running the server 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+  flask run 
+```
+## Tech Stack
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Front-Side:** ReactJS
 
-### Code Splitting
+**Server-side:** Node,Firebase,Flask, 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Machine Learning Model Development**: Random Forest, Decision Tree Regressor
 
-### Analyzing the Bundle Size
+**Machine Learning Playground**: Google Colaboratory.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## Acknowledgements
+ - I would like to thank Mr Kazi Tansen for his expert advice, encouragement and commitment to supporting me throughout this challenging project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Code Acknowledgements
 
-### Advanced Configuration
+ - [Crop Recommendation System](https://github.com/Gladiator07/Harvestify)
+ - [Dataset for Crop Prediction System ](https://www.kaggle.com/datasets/patelris/crop-yield-prediction-dataset)
+   
+## Authors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [@Manavpatel1803](https://github.com/Manavpatel1803)
+  
