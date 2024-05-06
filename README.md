@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+#AgriForecast- A sustainable solution for crop yield prediction using ML algorithms 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Logo](components/images/farm.mp4)
+
 
 ## Available Scripts
 
