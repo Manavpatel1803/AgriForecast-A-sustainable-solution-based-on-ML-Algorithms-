@@ -7,7 +7,7 @@
 
 A Crop yield prediction solution using Machine learning to predict the crop production based on the environmental data and that will help farmers or agricultural experts to effectively analyse prodcution  or loss of crop in order to do sustainable farming.
 
-## [Demo](https://uelac-my.sharepoint.com/:v:/r/personal/u2045599_uel_ac_uk/Documents/Recordings/Demo%20Video%20for%20dissertation%20Manav%20Yogesh%20PATEL-20240412_142424-Meeting%20Recording.mp4?csf=1&web=1&e=MUVO0i)
+## [Demo (Only for University of East London Staff members)](https://uelac-my.sharepoint.com/:v:/r/personal/u2045599_uel_ac_uk/Documents/Recordings/Demo%20Video%20for%20dissertation%20Manav%20Yogesh%20PATEL-20240412_142424-Meeting%20Recording.mp4?csf=1&web=1&e=MUVO0i)
  
 [<img src="src/images/image.jpg">](https://uelac-my.sharepoint.com/:v:/r/personal/u2045599_uel_ac_uk/Documents/Recordings/Demo%20Video%20for%20dissertation%20Manav%20Yogesh%20PATEL-20240412_142424-Meeting%20Recording.mp4?csf=1&web=1&e=MUVO0i)
 
