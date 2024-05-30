@@ -115,7 +115,8 @@ const handleChangeItem = (e) => {
             console.log('Form data:', formData);
             const response = await axios.post('http://localhost:5000/predict', formData); // Adjust the endpoint URL accordingly
             console.log('Response',response.data); // Handle the response as needed
-            const prediction = response.data.prediction;
+            const prediction = response.data.prediction / (1000 * 10);
+
             setPrediction(prediction);
         } catch (error) {
             console.error('Error occurred while making the request:', error);
@@ -193,7 +194,7 @@ const handleChangeItem = (e) => {
                 
                 <h2 className="text-lg font-bold">Prediction</h2>
             </div>
-            <p className="text-gray-700 mb-4">Congratulations !!! The predicted value is {prediction}  hectare per year </p>
+            <p className="text-gray-700 mb-4">Congratulations !!! The predicted value is {prediction} Tonnes per hectare  </p>
             <button onClick={() => setPrediction(null)} className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">Close</button>
         </div>
     </div>
